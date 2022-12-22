@@ -1,15 +1,10 @@
 package com.joutvhu.dynamic.freemarker.directive;
 
+import com.joutvhu.dynamic.commons.directive.TrimSymbol;
 import freemarker.core.Environment;
-import freemarker.template.TemplateDirectiveBody;
-import freemarker.template.TemplateDirectiveModel;
-import freemarker.template.TemplateException;
-import freemarker.template.TemplateModel;
-import freemarker.template.TemplateModelException;
+import freemarker.template.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,19 +16,9 @@ import java.util.Map;
  * @since 1.0.0
  */
 public class WhereDirective implements TemplateDirectiveModel {
-    private static final TrimDirective.TrimSymbol symbols = new TrimDirective.TrimSymbol(
-            "where", getOverrides(true, "and", "or"),
-            null, getOverrides(false, "and", "or"));
-
-    private static final List<String> getOverrides(boolean prefix, String... overrides) {
-        List<String> result = new ArrayList<>();
-        for (String o : overrides) {
-            result.add(prefix ? o + " " : " " + o);
-            result.add(prefix ? o + "\n" : "\n" + o);
-            result.add(prefix ? o + "\t" : "\t" + o);
-        }
-        return result;
-    }
+    private static final TrimSymbol symbol = new TrimSymbol(
+            "where", TrimSymbol.getOverrides(true, "and", "or"),
+            null, TrimSymbol.getOverrides(false, "and", "or"));
 
     @Override
     public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body)
@@ -42,6 +27,6 @@ public class WhereDirective implements TemplateDirectiveModel {
             throw new TemplateModelException("This directive doesn't allow parameters.");
 
         if (body != null)
-            TrimDirective.TrimWriter.of(env.getOut(), symbols).render(body);
+            TrimWriter.of(env.getOut(), symbol).render(body);
     }
 }
