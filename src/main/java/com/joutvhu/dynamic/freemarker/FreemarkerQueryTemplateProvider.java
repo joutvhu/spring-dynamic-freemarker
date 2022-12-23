@@ -12,7 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import java.io.IOException;
 
 /**
- * FreemarkerQueryTemplateProvider
+ * Freemarker dynamic query template provider.
  *
  * @author Giao Ho
  * @since 1.0.0
@@ -21,11 +21,13 @@ import java.io.IOException;
 public class FreemarkerQueryTemplateProvider extends DynamicQueryTemplateProvider {
     private static final Log log = LogFactory.getLog(FreemarkerQueryTemplateProvider.class);
 
-    private static StringTemplateLoader sqlTemplateLoader = new StringTemplateLoader();
-    private static Configuration cfg = FreemarkerTemplateConfiguration
-            .instanceWithDefault()
-            .templateLoader(sqlTemplateLoader)
-            .configuration();
+    private final StringTemplateLoader sqlTemplateLoader = new StringTemplateLoader();
+    private FreemarkerTemplateConfiguration configuration;
+    private Configuration cfg;
+
+    public void setConfiguration(FreemarkerTemplateConfiguration configuration) {
+        this.configuration = configuration;
+    }
 
     @Override
     public DynamicQueryTemplate createTemplate(String name, String content) {
@@ -54,5 +56,14 @@ public class FreemarkerQueryTemplateProvider extends DynamicQueryTemplateProvide
         if (src != null)
             log.warn("Found duplicate template key, will replace the value, key: " + name);
         sqlTemplateLoader.putTemplate(name, content);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        if (configuration == null)
+            configuration = FreemarkerTemplateConfiguration.instanceWithDefault();
+        configuration = configuration.templateLoader(sqlTemplateLoader);
+        cfg = configuration.configuration();
+        super.afterPropertiesSet();
     }
 }

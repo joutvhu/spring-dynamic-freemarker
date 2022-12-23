@@ -5,6 +5,7 @@ import com.joutvhu.dynamic.freemarker.directive.TrimDirective;
 import com.joutvhu.dynamic.freemarker.directive.WhereDirective;
 import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
+import freemarker.template.TemplateModel;
 
 /**
  * Freemarker configuration builder.
@@ -35,6 +36,11 @@ public class FreemarkerTemplateConfiguration {
         cfg.setSharedVariable("set", new SetDirective());
         cfg.setSharedVariable("where", new WhereDirective());
 
+        return this;
+    }
+
+    public FreemarkerTemplateConfiguration registerDirective(String name, TemplateModel directive) {
+        cfg.setSharedVariable(name, directive);
         return this;
     }
 
