@@ -1,4 +1,4 @@
-package com.joutvhu.dynamic.freemarker.directive;
+package com.joutvhu.dynamic.freemarker.io;
 
 import com.joutvhu.dynamic.commons.directive.TrimSymbol;
 import freemarker.template.TemplateDirectiveBody;

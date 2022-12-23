@@ -1,6 +1,7 @@
 package com.joutvhu.dynamic.freemarker.directive;
 
 import com.joutvhu.dynamic.commons.directive.TrimSymbol;
+import com.joutvhu.dynamic.freemarker.io.TrimWriter;
 import freemarker.core.Environment;
 import freemarker.ext.beans.InvalidPropertyException;
 import freemarker.template.*;
