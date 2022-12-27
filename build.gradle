@@ -136,7 +136,7 @@ publishing {
 
             pom {
                 name = project.name
-                description = ''
+                description = 'Freemarker dynamic query template provider.'
                 url = 'https://github.com/joutvhu/spring-dynamic-freemarker'
                 licenses {
                     license {
