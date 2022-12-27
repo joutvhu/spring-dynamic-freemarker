@@ -32,7 +32,7 @@ public class FreemarkerQueryTemplateProvider extends DynamicQueryTemplateProvide
     @Override
     public DynamicQueryTemplate createTemplate(String name, String content) {
         try {
-            return new FreemarkerQueryTemplate(new Template(name, content, cfg));
+            return new FreemarkerQueryTemplate(name, content, cfg, encoding);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
