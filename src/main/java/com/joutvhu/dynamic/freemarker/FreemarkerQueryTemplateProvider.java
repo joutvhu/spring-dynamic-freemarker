@@ -34,7 +34,7 @@ public class FreemarkerQueryTemplateProvider extends DynamicQueryTemplateProvide
         try {
             return new FreemarkerQueryTemplate(name, content, cfg, encoding);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e);
             return null;
         }
     }
@@ -43,11 +43,12 @@ public class FreemarkerQueryTemplateProvider extends DynamicQueryTemplateProvide
     public DynamicQueryTemplate findTemplate(String name) {
         try {
             Template template = cfg.getTemplate(name, encoding);
-            return new FreemarkerQueryTemplate(template);
+            if (template != null)
+                return new FreemarkerQueryTemplate(template);
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            log.error(e);
         }
+        return null;
     }
 
     @Override
