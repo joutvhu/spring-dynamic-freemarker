@@ -68,10 +68,10 @@ where t.userId = :userId
 
 `@trim` directive has four parameters: `prefix`, `prefixOverrides`, `suffix`, `suffixOverrides`.
 
-- `prefix` is the string value that will be inserted at the start of the content if it is not empty.
-- `prefixOverrides` are values that will be removed if they are at the start of a content.
-- `suffix` is the string value that will be inserted at the end of the content if it is not empty.
-- `suffixOverrides` are values that will be removed if they are at the end of a content.
+- `prefix` is the string value that will be inserted at the start of the content if it is not empty, value type is string.
+- `prefixOverrides` are values that will be removed if they are at the start of a content, value type is list of strings.
+- `suffix` is the string value that will be inserted at the end of the content if it is not empty, value type is string.
+- `suffixOverrides` are values that will be removed if they are at the end of a content, value type is list of strings.
 
  ```sql
 <@trim prefix="where (" prefixOverrides=["and ", "or "] suffix=")" suffixOverrides=[" and", " or"]>
