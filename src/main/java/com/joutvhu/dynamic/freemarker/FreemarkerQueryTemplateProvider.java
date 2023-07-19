@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -45,6 +46,7 @@ public class FreemarkerQueryTemplateProvider extends DynamicQueryTemplateProvide
             Template template = cfg.getTemplate(name, encoding);
             if (template != null)
                 return new FreemarkerQueryTemplate(template);
+        } catch (FileNotFoundException ignored) {
         } catch (IOException e) {
             log.error(e);
         }
